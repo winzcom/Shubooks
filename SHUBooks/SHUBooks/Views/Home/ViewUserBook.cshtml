@@ -1,0 +1,122 @@
+﻿@model SHUBooks.Models.Book
+
+@{
+    ViewBag.Title = "ViewUserBook";
+}
+
+<h2>ViewUserBook</h2>
+
+<div>
+    <h4>Book</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publisher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CopyrightDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CopyrightDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Condition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @Html.Image("Picture", Model.Picture, htmlAttributes: new { @width = "50", @height = "50" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityInStock)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

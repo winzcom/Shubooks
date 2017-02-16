@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "BestSeller";
+    //int counter = 0;
+    
+}
+
+<h2>BestSeller</h2>
+
+<table>
+    <tr>
+        <th>Book Title</th>
+        <th>Total</th>
+    </tr>
+    @*@foreach (var record in Model)
+    {
+        <tr><td>@record</td></tr>
+        <tr><td>@record.Total</td></tr>
+    }*@
+    @for (int counter = 0; counter < ViewBag.contentCount; counter++)
+    {
+        <tr><td>@Model[counter]</td></tr>
+        <tr><td>@Model[counter]</td></tr>
+    }
+</table>

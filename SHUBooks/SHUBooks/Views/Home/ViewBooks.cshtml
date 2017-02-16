@@ -1,0 +1,197 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<SHUBooks.Models.Book>
+
+    @{
+        ViewBag.Title = "ViewBooks";
+    }
+
+    <h2>Books Available</h2>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    @Html.Partial("SearchForm")
+    <div class="panel panel-default">
+        <div class="panel-heading">Books Available for Sale:</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Subject.Title)
+                    </th>
+                    <!--th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().User.FirstName)
+                    </!--th>-->
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Publisher)
+                    </th>
+                    <!--th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().CopyrightDate)
+                    </!--th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Pages)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Condition)          
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Age)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().QuantityInStock)
+                    </th>-->
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().ISBN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Picture)
+                    </th>
+                    
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Title)
+            </td>
+            <!--td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </!--td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <!--td>
+                @Html.DisplayFor(modelItem => item.CopyrightDate)
+            </!--td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if (item.QuantityInStock > 0)
+                    {
+                    @Html.Label("In Stock")
+                    }
+                    else
+                    {  @Html.Label("Out of Stock")}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Picture)*@
+                @Html.Image("Picture", item.Picture, htmlAttributes: new { @width = "50", @height = "50" })
+            </td>
+            
+            <td>
+                @Html.ActionLink("Details", "ViewUserBook", new { BookId = item.BookId }) |
+                @Html.ActionLink("View Copies", "ViewBook", new { ISBN = item.ISBN })
+                @*@Html.ActionLink("Add To Cart", "Cart", new { id = item.BookId }, htmlAttributes: new { @class = "addcart" })
+                    @Html.ActionLink("Delete", "Delete", new { BookId = item.BookId }) |
+    @Html.ActionLink("Edit", "EditUserBook", new { BookId = item.BookId }, htmlAttributes: new { @class = "glyphicon glyphicon-edit" }) |*@
+
+               
+                
+            </td>
+        </tr>
+        }
+
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
+            </div>
+        </div>
+
+            @section Scripts{
+            <script src="~/Scripts/bootbox.min.js"></script>
+                <script>
+                   
+                    
+                    $(function () {
+
+                        var count = $("#sup").text();
+                        count = parseInt(count) || 0
+                        
+                        $('a.addcart').click(function (e) {
+                           // return false;
+                            var that = $(this);
+                            bootbox.confirm({
+
+                                size: 'small',
+                                message: "Are You Sure",
+                                callback: function (result) {
+
+                                    if (result) {
+                                       
+                                        //$(this).parents("tr").fadeOut(1500)
+
+                                        $.ajax({
+
+                                            type: "GET",
+                                            url: $(this).attr("href"),
+                                        }).success(function (data) {
+                                            count++;
+                                            $("#sup").text(count)
+                                        }).error(function (data) {
+
+                                            alert(data.error);
+                                        })
+                                    }
+                                }
+                            })
+                            
+                            return false;
+                        })
+
+                        function setCookie(cname, cvalue) {
+                            var d = new Date();
+                            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                            var expires = "expires=" + d.toUTCString();
+                            document.cookie = cname + "=" + cvalue;
+                        }
+
+                        function getCookie(cname) {
+                            var name = cname + "=";
+                            var ca = document.cookie.split(';');
+                            for (var i = 0; i < ca.length; i++) {
+                                var c = ca[i];
+                                while (c.charAt(0) == ' ') c = c.substring(1);
+                                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                            }
+                            return "";
+                        }
+                    });
+                </script>
+            }

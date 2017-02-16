@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="well well-sm">
+    @using (Html.BeginForm("ViewBooks", "Home", FormMethod.Post))
+    {
+        <span>
+            <input type="text" name="searchString">
+            <select name="searchBy">
+                <option value="0" selected>All</option>
+                <option value="1">Title</option>
+                <option value="2">ISBN</option>
+                <option value="3">Author</option>
+                <option value="4">Price</option>
+            </select>
+            <input type="submit" value="Search" class="btn btn-info btn-sm" />
+            <!--/form  -->
+        </span>
+    }
+</div>
+

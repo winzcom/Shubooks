@@ -1,0 +1,110 @@
+﻿@model IEnumerable<SHUBooks.Models.Item>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+                      <h2>My Cart</h2>
+
+                      <p>
+                          @*@Html.ActionLink("Create New", "Create")*@
+                      </p>
+                      <div class="panel panel-default">
+                          <div class ="panel-heading">My Shopping Cart:</div>
+                          <div class="panel-body">
+                              <table class="table table-striped">
+                                  <tr>
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.quantity)
+
+                                      </th>
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.book.Title)
+                                      </th>
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.book.Author)
+                                      </th>
+                                      <th>
+                                          @Html.DisplayNameFor(model => model.book.Subject.Title)
+                                      </th>
+                                      <th></th>
+                                  </tr>
+
+                                  @foreach (var item in Model)
+                          {
+                                  <tr>
+                                      <td id="@item.book.BookId" class="Edit">
+                                          @Html.DisplayFor(modelItem => item.quantity)
+
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.book.Title)
+                                      </td>
+
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.book.Author)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.book.Subject.Title)
+                                      </td>
+                                      <td>
+                                          @Html.ActionLink("Edit", "EditCart", new { id = item.book.BookId }, htmlAttributes: new { @class = "btn btn-info", @role = "buttons" })
+                                          @Html.ActionLink("Delete", "DeleteItemFromCart", new { id = item.book.BookId }, htmlAttributes: new { @class = "btn btn-info", @role = "buttons" })
+                                      </td>
+                                  </tr>
+                          }
+
+                              </table>
+                          </div>
+                      </div>  
+                      @Html.ActionLink("Continue Shopping ", "ViewBooks", new { /* id=item.PrimaryKey */ }) |
+                      @Html.ActionLink("CheckOut ", "CheckOut", new { /* id=item.PrimaryKey */ })
+     
+                    @section Scripts{
+                      <script src="~/Scripts/bootbox.min.js"></script>
+                          <script>
+
+                              $(function () {
+
+                                  $('a[href*=Delete]').click(function () {
+
+                                      var ele = $(this)
+                                      var count = $("sup").text();
+                                      var sup = $("sup");
+                                      count = parseInt(count)
+                                      bootbox.confirm({
+
+                                          size: "small",
+                                          message: "Are You Sure",
+                                          callback: function (result) {
+
+                                              if (result == true) {
+
+
+
+                                                  ele.parents("tr").fadeOut(1500)
+                                                  $.ajax({
+
+                                                      type: "GET",
+                                                      url: ele.attr("href"),
+                                                  }).success(function (data) {
+                                                      var no = ele.parents("tr").children("td").first().text();
+                                                      no = parseInt(no);
+                                                      count = count - no;
+                                                      sup.text(count);
+                                                      ele.parents("tr").fadeOut(1000);
+                                                      $('.table').remove(ele.parents("tr"));
+                                                  }).error(function (data) {
+
+                                                      alert(data);
+                                                  })
+                                              }
+
+                                          }
+                                      })
+                                      
+                                      return false;
+                                  })
+                              });
+                          </script>
+                      }

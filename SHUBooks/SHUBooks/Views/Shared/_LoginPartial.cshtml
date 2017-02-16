@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink(" Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "glyphicon glyphicon-user" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
+        <li><a href="/Home/Cart" id="cartLink"><span class="glyphicon glyphicon-shopping-cart"><sup id="sup" class="badge">@ViewBag.Quantity</sup></span></a></li>
+    </ul>
+    
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink(" Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "glyphicon glyphicon-user" })</li>
+        <li>@Html.ActionLink(" Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "glyphicon glyphicon-log-in" })</li>
+        <li><a href="/Home/Cart" id="cartLink"><span class="glyphicon glyphicon-shopping-cart"><sup id="sup" class="badge" >@ViewBag.Quantity</sup></span></a></li>
+    </ul>
+}

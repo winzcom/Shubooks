@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SHUBooks.Models.Book>
+
+@{
+    ViewBag.Title = "ViewMyBooks";
+}
+
+<h2>My Books</h2>
+
+<p>
+    @Html.ActionLink("Create New Book", "CreateBook")
+</p>
+<div class="panel panel-default">
+    <div class="panel-heading">My Books:</div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject.Title)
+                </th>
+                <!--th>
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </!--th>-->
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <!--th>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </!--th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CopyrightDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pages)
+                </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.Condition)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>-->
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Picture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantityInStock)
+                </th>
+                <!--th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </!--th>-->
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject.Title)
+                    </td>
+                    <!--td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </!--td>--> 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <!--td>
+                        @Html.DisplayFor(modelItem => item.Publisher)
+                    </!--td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CopyrightDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pages)
+                    </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Condition)
+                    </td>
+                        
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>-->
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Picture)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantityInStock)
+                    </td>
+                    <!--td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </!--td>-->
+                    <td>
+                        @Html.ActionLink("Edit", "EditUserBook", new { BookId = item.BookId }, htmlAttributes: new { @class = "btn btn-info", @role = "buttons" })
+                        @Html.ActionLink("Details", "ViewUserBook", new { BookId = item.BookId }, htmlAttributes: new { @class = "btn btn-info", @role = "buttons" })
+                       @* @Html.ActionLink("Delete", "Delete", new { BookId = item.BookId }, htmlAttributes: new { @class = "btn btn-info", @role = "buttons" })*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
